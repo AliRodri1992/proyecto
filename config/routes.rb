@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :courses, only: [:index]
   resources :enrollments, only: [:new, :create, :destroy]
   resources :students
   root 'home#index'
