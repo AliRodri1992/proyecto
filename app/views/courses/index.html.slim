@@ -1,4 +1,21 @@
-h1 List of Courses
-ul
-  - @courses.each do |course|
-    li = course.name
+.row
+  .col-lg-6
+    h1 List of Courses
+  .col-lg-6.text-right
+    = button_to 'Home', root_path, method: :get, class: 'btn btn-secondary mt-2'
+.row
+  .col-lg-12
+    table.table
+      thead
+        tr
+          th #
+          th Name
+      tbody
+        - unless @courses.blank?
+          - @courses.each do |course|
+            tr
+              td = course.id
+              td = course.name
+        - else
+          tr
+            td colspan="2" No existen cursos registrados.

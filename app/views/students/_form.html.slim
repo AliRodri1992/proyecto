@@ -5,9 +5,10 @@
 = form_with model: @student, local: true do |form|
   .form-group
     = form.label :name
-    = form.text_field :name
+    = form.text_field :name, placeholder: 'Ingrese el nombre del estudiante.', class: 'form-control'
   .form-group
     = form.label :age
-    = form.text_field :age
+    = form.text_field :age, placeholder: 'Ingrese la edad del estudiante.', class: 'form-control'
   .form-group
-    = form.submit
+    = link_to 'Back', students_path, class: 'btn btn-secondary mr-2'
+    = form.submit btn, class: 'btn btn-success'
