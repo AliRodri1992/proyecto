@@ -1,0 +1,28 @@
+.row
+  .col-lg-6
+    h1 List of Students
+  .col-lg-6.text-right
+    = link_to 'Home', root_path, class: 'btn btn-secondary mt-2 mr-2'
+    = link_to 'New', new_student_path, class: 'btn btn-primary mt-2'
+.row
+  .col-lg-12
+    table.table
+      thead
+        tr
+          th #
+          th Name
+          th Age
+          th.text-center colspan="3" Actions
+      tbody
+        - unless @students.blank?
+          - @students.each do |student|
+            tr
+              td = student.id
+              td = student.name
+              td = student.age
+              td.text-center = link_to "Show", student
+              td.text-center = link_to "Edit", edit_student_path(student.id)
+              td.text-center = link_to 'Destroy', student, method: :delete, data: {confirm: 'Are you sure'}
+        - else
+          tr
+            td.text-center colspan="6" No existen estudiantes registrados.

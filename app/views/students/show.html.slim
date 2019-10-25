@@ -1,0 +1,20 @@
+.row
+  .col-lg-6
+    h1 Student Information
+  .col-lg-6.text-right
+    = link_to 'Back', students_path, class: 'btn btn-secondary mt-2 mr-2'
+    = link_to 'Edit', edit_student_path, class: 'btn btn-primary mt-2 mr-2'
+.row
+  .col-lg-12
+    table.table.table-bordered.table-sm
+      tbody
+        tr
+          th.text-center scope="row" = "Nombre: #{@student.name.capitalize}"
+          th.text-center scope="row" = "Edad: #{@student.age}"
+        tr
+          th.text-center scope="row" Courses
+          th.text-center scope="row" = button_to "Register", new_enrollment_path, method: :get, class: 'btn btn-warning'
+        - @student.enrollments.each do |enrollment|
+          tr
+            td.text-center = enrollment.course.name
+            td.text-center = link_to "Drop", enrollment_path(enrollment), method: :delete, clasas: 'btn'
