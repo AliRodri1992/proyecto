@@ -7,7 +7,14 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    = render 'shared/navbar'
-    .container
-      main role="main"
-        = yield
+    - if current_user
+      = render 'shared/navbar'
+      p.notice
+        = notice
+      p.alert
+        = alert
+      .container
+        main role="main"
+          = yield
+    - else
+      = yield
