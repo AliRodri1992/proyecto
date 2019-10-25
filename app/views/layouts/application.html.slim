@@ -6,8 +6,9 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  body
-    - if current_user
+
+  - if current_user
+    body
       = render 'shared/navbar'
       p.notice
         = notice
@@ -16,5 +17,6 @@ html
       .container
         main role="main"
           = yield
-    - else
+  - else
+    body.text-center#login
       = yield
