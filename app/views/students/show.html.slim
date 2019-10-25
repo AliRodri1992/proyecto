@@ -1,0 +1,15 @@
+h1 = "#{@student.name.capitalize}'s Page"
+
+h2 = "Age: #{@student.age}"
+
+h2 Courses
+= button_to "Register Course", new_enrollment_path, method: :get
+ul
+  - @student.enrollments.each do |enrollment|
+    li = enrollment.course.name
+    = button_to "Drop", enrollment_path(enrollment), method: :delete
+
+= button_to "Edit", edit_student_path, method: :get
+= button_to "Destroy", student_path, method: :delete
+
+= link_to "Destroy", student_path

@@ -1,0 +1,13 @@
+- if flash[:errors]
+  - flash[:errors].each do |error|
+    p style="color: red;" = error
+
+= form_with model: @student, local: true do |form|
+  .form-group
+    = form.label :name
+    = form.text_field :name
+  .form-group
+    = form.label :age
+    = form.text_field :age
+  .form-group
+    = form.submit
