@@ -35,6 +35,7 @@ class StudentsController < ApplicationController
 
   def destroy
     @student.destroy
+    flash[:success] = "Student deleted successfully."
     redirect_to students_path
   end
 

@@ -10,10 +10,7 @@ html
   - if current_user
     body
       = render 'shared/navbar'
-      p.notice
-        = notice
-      p.alert
-        = alert
+      = render 'shared/flash_messages'
       .container
         main role="main"
           = yield

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:username]
 
-  enum rol_id: [ :nada, :administrador, :usuario ]
-
   validates :username, presence: true
+
+  belongs_to :rol
 end
