@@ -1,0 +1,26 @@
+- if flash[:errors]
+  - flash[:errors].each do |error|
+    p style="color: red;" = error
+
+= form_with model: @user, local: true do |form|
+  .form-group
+    = form.label :username
+    = form.text_field :username, placeholder: 'Ingrese username.', class: 'form-control'
+  .form-group
+    = form.label :email
+    = form.text_field :email, placeholder: 'Ingrese email.', class: 'form-control'
+  .form-group
+    = form.label :password
+    = form.password_field :password, placeholder: 'Ingrese la contrasela.', class: 'form-control'
+  .form-group
+    = form.label :password_confirmation
+    = form.password_field :password_confirmation, placeholder: 'Ingrese la contrasela.', class: 'form-control'
+  .form-group
+    = form.label :rol_id
+    - Rol.all.each do |r|
+      .custom-control.custom-radio
+        = form.radio_button :rol_id, r.id.to_i, class: "custom-control-input"
+        = form.label :rol_id, r.name, class: "custom-control-label", for: "user_rol_id_#{r.id}"
+  .form-group
+    = link_to 'Back', users_path, class: 'btn btn-secondary mr-2'
+    = form.submit btn, class: 'btn btn-success'

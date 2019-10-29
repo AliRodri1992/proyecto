@@ -1,0 +1,30 @@
+.row
+  .col-lg-6
+    h1 List of Users
+  .col-lg-6.text-right
+    = link_to 'Home', root_path, class: 'btn btn-secondary mt-2 mr-2'
+    = link_to 'New', new_user_path, class: 'btn btn-primary mt-2'
+.row
+  .col-lg-12
+    table.table
+      thead
+        tr
+          th #
+          th Username
+          th Email
+          th Rol
+          th.text-center colspan="3" Actions
+      tbody
+        - unless @users.blank?
+          - @users.each do |user|
+            tr
+              td = user.id
+              td = user.username
+              td = user.email
+              td = user.rol.name
+              td.text-center = link_to "Show", user
+              td.text-center = link_to "Edit", edit_user_path(user.id)
+              td.text-center = link_to 'Destroy', user, method: :delete, data: {confirm: 'Are you sure'}
+        - else
+          tr
+            td.text-center colspan="7" No existen estudiantes registrados.
