@@ -8,4 +8,8 @@ class User < ApplicationRecord
   validates :username, presence: true
 
   belongs_to :rol
+
+  def admin?
+    self.rol.name == "administrador"
+  end
 end

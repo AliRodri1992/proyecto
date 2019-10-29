@@ -1,15 +1,18 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:edit, :update, :show, :destroy]
-  def index
-    @students = Student.order(:name)
-  end
+  load_and_authorize_resource
+
+  def index; end
+
+  def show; end
 
   def new
     @student = Student.new
   end
 
+  def edit; end
+
   def create
-    @student = Student.new(student_paramms)
+    @student = Student.new(student_params)
     if @student.save
       redirect_to students_path
       flash[:success] = "Students created successfully."
@@ -19,14 +22,10 @@ class StudentsController < ApplicationController
     end
   end
 
-  def show; end
-
-  def edit; end
-
   def update
-    if @student.update(student_paramms)
-      redirect_to student_path(@student)
-      flash[:success] = "Student updated successfully."
+    if @student.update(student_params)
+      redirect_to students_path
+      flash[:success] = "Students updated successfully."
     else
       flash[:errors] = @student.errors.full_messages
       render :edit
@@ -34,17 +33,20 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    @student.destroy
-    flash[:success] = "Student deleted successfully."
-    redirect_to students_path
+    begin
+      @student.destroy
+      flash[:success] = "Student deleted successfully."
+      redirect_to students_path
+    rescue ActiveRecord::DeleteRestrictionError => e
+      @student.errors.add(:base, e)
+      flash[:error] = "#{e}"
+    ensure
+      redirect_to students_url
+    end
   end
 
   private
-  def student_paramms
+  def student_params
     params.require(:student).permit(:name, :age)
-  end
-
-  def set_student
-    @student = Student.find(params[:id])
   end
 end

@@ -26,7 +26,8 @@ nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
         a.nav-link.dropdown-toggle href="#" id="userSession" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" = current_user.username
         .dropdown-menu aria-labelledby="userSession"
           = link_to 'Edit profile', edit_user_registration_path, class: 'dropdown-item'
-          = link_to 'Users', users_path, class: 'dropdown-item'
+          - if can? :manage, users_path
+            = link_to 'Users', users_path, class: 'dropdown-item'
           hr
           - if signed_in?
             = link_to 'Logout', destroy_user_session_path, :method => :delete, class: 'dropdown-item'

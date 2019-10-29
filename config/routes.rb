@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   scope "/admin" do
     resources :users
 
-    resources :courses, only: [:index]
+    resources :courses, only: [:index, :destroy]
 
     resources :enrollments, only: [:new, :create, :destroy]
 

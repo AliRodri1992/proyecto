@@ -10,12 +10,14 @@
         tr
           th #
           th Name
+          th.text-center colspan="2" Actions
       tbody
         - unless @courses.blank?
           - @courses.each do |course|
             tr
               td = course.id
               td = course.name
+              td.text-center = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure' }
         - else
           tr
             td colspan="2" No existen cursos registrados.

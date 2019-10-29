@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :destroy]
-  def index
-    @users = User.order(:username)
-  end
+  load_and_authorize_resource
+
+  def index; end
 
   def show; end
 
@@ -43,9 +42,5 @@ class UsersController < ApplicationController
   def user_params
     params[:user][:rol_id] = params[:user][:rol_id].to_i
     params.require(:user).permit(:username, :email, :password, :password_confirmation, :rol_id)
-  end
-
-  def set_user
-    @user = User.find(params[:id])
   end
 end
